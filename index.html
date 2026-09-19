@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoxAI - AI工具导航 | 发现最新AI工具</title>
+    <meta name="description" content="VoxAI工具导航，收录全球最实用的AI工具，包括AI写作、AI图片、AI视频、AI音乐、AI代码等分类目录。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: #667eea;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .search-box input::placeholder {
+            color: #666;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 40px 20px;
+        }
+        
+        /* Ad Banner */
+        .ad-banner {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .ad-banner h3 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .ad-banner p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .ad-banner .ad-placeholder {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .ad-banner a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .ad-banner a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Recommended Tools */
+        .recommended {
+            margin-bottom: 40px;
+        }
+        
+        .recommended h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .recommended h2::before {
+            content: '⭐';
+        }
+        
+        .recommended-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .recommended-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .recommended-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(102, 126, 234, 0.3);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .recommended-card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .recommended-card h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .recommended-card p {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .recommended-card .affiliate-tag {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        
+        .recommended-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .recommended-card a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Category Grid */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .category {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .category h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .category-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-list {
+            list-style: none;
+        }
+        
+        .tool-list li {
+            margin-bottom: 12px;
+        }
+        
+        .tool-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .tool-list a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            color: #fff;
+            padding-left: 20px;
+        }
+        
+        .tool-list .tool-name {
+            font-weight: 500;
+        }
+        
+        .tool-list .tool-tag {
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+        
+        .tool-list .tool-tag.cn {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff6b6b;
+        }
+        
+        .tool-list .tool-tag.hot {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff6b6b;
+        }
+        
+        /* Affiliate Link Style */
+        .affiliate-link {
+            position: relative;
+        }
+        
+        .affiliate-link::after {
+            content: '💰';
+            font-size: 10px;
+            margin-left: 5px;
+            opacity: 0.7;
+        }
+        
+        /* Footer Ad */
+        .footer-ad {
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-ad h3 {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-ad-placeholder {
+            max-width: 728px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 0;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 30px;
+            }
+            
+            .recommended-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">VoxAI</div>
+            <div class="tagline">发现AI工具，提升效率</div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>AI工具导航</h1>
+        <p>收录全球最实用的AI工具，帮你找到最合适的AI解决方案</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">收录工具</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">10</div>
+                <div class="stat-label">分类目录</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">免费</div>
+                <div class="stat-label">永久免费</div>
+            </div>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" placeholder="搜索AI工具..." id="searchInput" onkeyup="searchTools()">
+        </div>
+    </section>
+    
+    <main>
+        <!-- Ad Banner -->
+        <div class="ad-banner">
+            <h3>🎯 AI工具推荐</h3>
+            <p>精选高效AI工具，部分享受专属优惠</p>
+            <div class="recommended-grid">
+                <div class="recommended-card">
+                    <span class="badge">热门</span>
+                    <h4>Cursor <span class="affiliate-tag">AI编程</span></h4>
+                    <p>AI编程神器，让开发效率提升10倍</p>
+                    <a href="https://cursor.com" target="_blank">免费试用 →</a>
+                </div>
+                <div class="recommended-card">
+                    <span class="badge">推荐</span>
+                    <h4>Suno AI <span class="affiliate-tag">AI音乐</span></h4>
+                    <p>输入文案自动生成音乐，零基础也能创作</p>
+                    <a href="https://suno.ai" target="_blank">开始创作 →</a>
+                </div>
+                <div class="recommended-card">
+                    <span class="badge">必备</span>
+                    <h4>ChatGPT <span class="affiliate-tag">AI助手</span></h4>
+                    <p>最强AI对话助手，解答一切问题</p>
+                    <a href="https://chat.openai.com" target="_blank">免费使用 →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recommended Tools Section -->
+        <div class="recommended">
+            <h2>本月热门工具</h2>
+            <div class="recommended-grid">
+                <div class="recommended-card">
+                    <span class="badge">NEW</span>
+                    <h4>Perplexity <span class="affiliate-tag">AI搜索</span></h4>
+                    <p>AI增强搜索引擎，实时获取全网最新信息</p>
+                    <a href="https://www.perplexity.ai" target="_blank">体验AI搜索 →</a>
+                </div>
+                <div class="recommended-card">
+                    <span class="badge">热门</span>
+                    <h4>Midjourney <span class="affiliate-tag">AI绘画</span></h4>
+                    <p>输入文字生成惊艳图片，设计师必备</p>
+                    <a href="https://midjourney.com" target="_blank">开始绘画 →</a>
+                </div>
+                <div class="recommended-card">
+                    <span class="badge">限时</span>
+                    <h4>Gamma <span class="affiliate-tag">AI做PPT</span></h4>
+                    <p>输入文字自动生成精美PPT演示文稿</p>
+                    <a href="https://gamma.app" target="_blank">免费试用 →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-grid">
+            <!-- AI图片 -->
+            <div class="category">
+                <div class="category-icon">🎨</div>
+                <h2>AI图片生成</h2>
+                <p class="category-desc">文生图、图生图 AI绘画工具</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://midjourney.com" target="_blank">
+                            <span class="tool-name">Midjourney</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://openai.com/index/dall-e-3/" target="_blank">
+                            <span class="tool-name">DALL-E 3</span>
+                            <span class="tool-tag">OpenAI</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.stabilityai.com" target="_blank">
+                            <span class="tool-name">Stable Diffusion</span>
+                            <span class="tool-tag">免费</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://leonardo.ai" target="_blank">
+                            <span class="tool-name">Leonardo.ai</span>
+                            <span class="tool-tag">游戏美术</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://tongyi.aliyun.com/wanwenxiang" target="_blank">
+                            <span class="tool-name">通义万相</span>
+                            <span class="tool-tag cn">国产</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zhipuai.cn" target="_blank">
+                            <span class="tool-name">智谱清言</span>
+                            <span class="tool-tag cn">国产</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI写作 -->
+            <div class="category">
+                <div class="category-icon">📝</div>
+                <h2>AI写作助手</h2>
+                <p class="category-desc">文案创作、内容生成智能助手</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://chat.openai.com" target="_blank">
+                            <span class="tool-name">ChatGPT</span>
+                            <span class="tool-tag">OpenAI</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://claude.ai" target="_blank">
+                            <span class="tool-name">Claude</span>
+                            <span class="tool-tag">Anthropic</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://yiyan.baidu.com" target="_blank">
+                            <span class="tool-name">文心一言</span>
+                            <span class="tool-tag cn">百度</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://xinghuo.xfyun.cn" target="_blank">
+                            <span class="tool-name">讯飞星火</span>
+                            <span class="tool-tag cn">科大讯飞</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.writesonic.com" target="_blank">
+                            <span class="tool-name">Writesonic</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://jasper.ai" target="_blank">
+                            <span class="tool-name">Jasper</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI视频 -->
+            <div class="category">
+                <div class="category-icon">🎬</div>
+                <h2>AI视频生成</h2>
+                <p class="category-desc">文生视频、AI动画创作工具</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://sora.com" target="_blank">
+                            <span class="tool-name">Sora</span>
+                            <span class="tool-tag">OpenAI</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://klingai.com" target="_blank">
+                            <span class="tool-name">可灵 AI</span>
+                            <span class="tool-tag cn">快手</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://runwayml.com" target="_blank">
+                            <span class="tool-name">Runway</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://pika.art" target="_blank">
+                            <span class="tool-name">Pika</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://haiper.ai" target="_blank">
+                            <span class="tool-name">Haiper</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://minimax.io" target="_blank">
+                            <span class="tool-name">MiniMax</span>
+                            <span class="tool-tag cn">国产</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI音乐 -->
+            <div class="category">
+                <div class="category-icon">🎵</div>
+                <h2>AI音乐生成</h2>
+                <p class="category-desc">AI作曲、编曲、歌词创作</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://suno.ai" target="_blank">
+                            <span class="tool-name">Suno AI</span>
+                            <span class="tool-tag hot">最火</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.udio.com" target="_blank">
+                            <span class="tool-name">Udio</span>
+                            <span class="tool-tag">国外</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.bandlab.com" target="_blank">
+                            <span class="tool-name">BandLab</span>
+                            <span class="tool-tag">免费</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://soundraw.io" target="_blank">
+                            <span class="tool-name">Soundraw</span>
+                            <span class="tool-tag">版权音乐</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI代码 -->
+            <div class="category">
+                <div class="category-icon">💻</div>
+                <h2>AI编程助手</h2>
+                <p class="category-desc">代码生成、调试、代码解释</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://github.com/features/copilot" target="_blank">
+                            <span class="tool-name">GitHub Copilot</span>
+                            <span class="tool-tag">微软</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://cursor.com" target="_blank">
+                            <span class="tool-name">Cursor</span>
+                            <span class="tool-tag hot">最火</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.codeium.com" target="_blank">
+                            <span class="tool-name">Codeium</span>
+                            <span class="tool-tag">免费</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.wind.cn" target="_blank">
+                            <span class="tool-name">WindAI</span>
+                            <span class="tool-tag cn">国产</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cursor.com" target="_blank">
+                            <span class="tool-name">通义灵码</span>
+                            <span class="tool-tag cn">阿里</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI语音 -->
+            <div class="category">
+                <div class="category-icon">🎙️</div>
+                <h2>AI语音合成</h2>
+                <p class="category-desc">文字转语音、语音克隆、配音</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://elevenlabs.io" target="_blank">
+                            <span class="tool-name">ElevenLabs</span>
+                            <span class="tool-tag">最强</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.microsoft.com/zh-cn/ai/azure-ai-speech" target="_blank">
+                            <span class="tool-name">Azure 语音</span>
+                            <span class="tool-tag">微软</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.volcengine.com/product/tts" target="_blank">
+                            <span class="tool-name">火山语音</span>
+                            <span class="tool-tag cn">字节</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ai.qq.com/platform/tts" target="_blank">
+                            <span class="tool-name">腾讯智影</span>
+                            <span class="tool-tag cn">腾讯</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI搜索 -->
+            <div class="category">
+                <div class="category-icon">🔍</div>
+                <h2>AI搜索引擎</h2>
+                <p class="category-desc">AI增强搜索、智能问答</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://www.perplexity.ai" target="_blank">
+                            <span class="tool-name">Perplexity</span>
+                            <span class="tool-tag hot">最火</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://metaso.cn" target="_blank">
+                            <span class="tool-name">秘塔AI搜索</span>
+                            <span class="tool-tag cn">国产</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://devv.ai" target="_blank">
+                            <span class="tool-name">Devv AI</span>
+                            <span class="tool-tag cn">程序员</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.phind.com" target="_blank">
+                            <span class="tool-name">Phind</span>
+                            <span class="tool-tag">开发者</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI办公 -->
+            <div class="category">
+                <div class="category-icon">📊</div>
+                <h2>AI办公效率</h2>
+                <p class="category-desc">PPT、Excel、文档处理自动化</p>
+                <ul class="tool-list">
+                    <li>
+                        <a href="https://www.notion.so" target="_blank">
+                            <span class="tool-name">Notion AI</span>
+                            <span class="tool-tag">笔记</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://copilot.microsoft.com" target="_blank">
+                            <span class="tool-name">Microsoft 365 Copilot</span>
+                            <span class="tool-tag">微软</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.wps.cn/ai" target="_blank">
+                            <span class="tool-name">WPS AI</span>
+                            <span class="tool-tag cn">国产</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.chatpdf.com" target="_blank">
+                            <span class="tool-name">ChatPDF</span>
+                            <span class="tool-tag">文档</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://gamma.app" target="_blank">
+                            <span class="tool-name">Gamma</span>
+                            <span class="tool-tag">PPT</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer Ad Area -->
+        <div class="footer-ad">
+            <h3>📢 合作伙伴</h3>
+            <div class="footer-ad-placeholder">
+                <p>广告位招商中</p>
+                <p style="font-size: 12px; margin-top: 10px;">联系邮箱：example@email.com</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Made by <a href="#">VoxAI</a> | 让AI工具触手可及</p>
+        <p style="margin-top: 10px; font-size: 12px;">
+            收录仅供参考，如有侵权请联系删除
+        </p>
+        <p style="margin-top: 15px; font-size: 12px; color: #555;">
+            © 2024 VoxAI. All rights reserved. | <a href="#">关于我们</a> | <a href="#">联系方式</a>
+        </p>
+    </footer>
+    
+    <script>
+        function searchTools() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const categories = document.querySelectorAll('.category');
+            const recommended = document.querySelector('.recommended');
+            const adBanner = document.querySelector('.ad-banner');
+            
+            // Search in recommended tools
+            if (recommended) {
+                const cards = recommended.querySelectorAll('.recommended-card');
+                let hasVisible = false;
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(filter) || filter === '') {
+                        card.style.display = '';
+                        hasVisible = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                recommended.style.display = hasVisible ? '' : 'none';
+            }
+            
+            // Hide ad banner when searching
+            if (adBanner) {
+                adBanner.style.display = filter === '' ? '' : 'none';
+            }
+            
+            // Search in categories
+            categories.forEach(category => {
+                const tools = category.querySelectorAll('.tool-list li');
+                let hasVisible = false;
+                
+                tools.forEach(tool => {
+                    const text = tool.textContent.toLowerCase();
+                    if (text.includes(filter) || filter === '') {
+                        tool.style.display = '';
+                        hasVisible = true;
+                    } else {
+                        tool.style.display = 'none';
+                    }
+                });
+                
+                category.style.display = hasVisible ? '' : 'none';
+            });
+        }
+        
+        // Track clicks on affiliate links (placeholder for analytics)
+        document.querySelectorAll('a[href*="affiliate"], a[href*="ref"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // Placeholder for affiliate tracking
+                console.log('Affiliate link clicked:', this.href);
+            });
+        });
+    </script>
+</body>
+</html>
