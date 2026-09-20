@@ -448,11 +448,11 @@
         
         <div class="stats">
             <div class="stat">
-                <div class="stat-number">70+</div>
+                <div class="stat-number" id="toolCount">--</div>
                 <div class="stat-label">收录工具</div>
             </div>
             <div class="stat">
-                <div class="stat-number">12</div>
+                <div class="stat-number" id="catCount">--</div>
                 <div class="stat-label">分类目录</div>
             </div>
             <div class="stat">
@@ -1238,6 +1238,15 @@
             });
           });
         }
+        // 实时更新工具和分类数量
+        (function updateCounts() {
+          const toolCount = document.querySelectorAll('.tool-list li').length;
+          const catCount = document.querySelectorAll('.category').length;
+          const el = document.getElementById('toolCount');
+          const el2 = document.getElementById('catCount');
+          if (el) el.textContent = toolCount;
+          if (el2) el2.textContent = catCount;
+        })();
     </script>
 </body>
 </html>
