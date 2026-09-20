@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxAI - AI工具导航 | 发现最新AI工具</title>
     <meta name="description" content="VoxAI工具导航，收录全球最实用的AI工具，包括AI写作、AI图片、AI视频、AI音乐、AI代码等分类目录。">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VoxAI">
+    <link rel="manifest" href="/manifest.json">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
@@ -1105,6 +1110,17 @@
         
         // Initialize AdSense ads
         (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').then(reg => {
+              console.log('PWA已启用');
+            }).catch(err => {
+              console.log('PWA注册失败', err);
+            });
+          });
+        }
     </script>
 </body>
 </html>
