@@ -1245,15 +1245,13 @@
           });
         }
 
-        // 实时更新工具和分类数量
-        (function updateCounts() {
-          const toolCount = document.querySelectorAll('.tool-list li').length;
-          const catCount = document.querySelectorAll('.category').length;
-          const el = document.getElementById('toolCount');
-          const el2 = document.getElementById('catCount');
+        // 实时更新工具和分类数量（等DOM加载完再执行）
+        var toolCount = document.querySelectorAll('.tool-list li').length;
+          var catCount = document.querySelectorAll('.category').length;
+          var el = document.getElementById('toolCount');
+          var el2 = document.getElementById('catCount');
           if (el) el.textContent = toolCount;
           if (el2) el2.textContent = catCount;
-        })();
     </script>
 </body>
 </html>
