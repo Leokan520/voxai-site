@@ -1238,6 +1238,13 @@
             });
           });
         }
+        // SW 更新自动刷新
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.addEventListener('message', e => {
+            if (e.data && e.data.type === 'RELOAD') window.location.reload();
+          });
+        }
+
         // 实时更新工具和分类数量
         (function updateCounts() {
           const toolCount = document.querySelectorAll('.tool-list li').length;

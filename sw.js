@@ -1,4 +1,4 @@
-const CACHE_NAME = 'voxai-v2';
+const CACHE_NAME = 'voxai-v3';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -14,6 +14,10 @@ self.addEventListener('activate', event => {
     )
   );
   self.clients.claim();
+  // 立即通知所有标签页刷新到新版本
+  self.clients.matchAll().then(clients => {
+    clients.forEach(client => client.postMessage({ type: 'RELOAD' }));
+  });
 });
 
 self.addEventListener('fetch', event => {
